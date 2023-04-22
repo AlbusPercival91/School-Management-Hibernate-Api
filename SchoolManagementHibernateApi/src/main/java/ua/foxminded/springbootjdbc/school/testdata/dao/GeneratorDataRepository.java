@@ -1,6 +1,10 @@
 package ua.foxminded.springbootjdbc.school.testdata.dao;
 
-import org.springframework.jdbc.core.JdbcTemplate;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Repository;
 import ua.foxminded.springbootjdbc.school.entity.Course;
 import ua.foxminded.springbootjdbc.school.entity.Group;
@@ -8,37 +12,35 @@ import ua.foxminded.springbootjdbc.school.entity.Student;
 import ua.foxminded.springbootjdbc.school.entity.StudentCourseRelation;
 
 @Repository
+@Transactional
 public class GeneratorDataRepository {
 
-  private final JdbcTemplate jdbcTemplate;
+  @PersistenceContext
+  private final EntityManager entityManager;
 
-  public GeneratorDataRepository(JdbcTemplate jdbcTemplate) {
-    this.jdbcTemplate = jdbcTemplate;
+  public GeneratorDataRepository(EntityManager entityManager) {
+    this.entityManager = entityManager;
   }
 
-  public int createStudent(Student student) {
-    String sql = "INSERT INTO school.students(group_id, first_name, last_name) VALUES(?,?,?);";
-    return jdbcTemplate.update(sql, student.getGroupId(), student.getFirstName(), student.getLastName());
+  public void createStudent(Student student) {
+    entityManager.persist(student);
   }
 
-  public int createGroup(Group group) {
-    String sql = "INSERT INTO school.groups(group_name) " + "VALUES(?)";
-    return jdbcTemplate.update(sql, group.getGroupName());
+  public void createGroup(Group group) {
+    entityManager.persist(group);
   }
 
-  public int createCourse(Course course) {
-    String sql = "INSERT INTO school.course(course_name, course_description) VALUES(?,?);";
-    return jdbcTemplate.update(sql, course.getCourseName(), course.getCourseDescription());
+  public void createCourse(Course course) {
+    entityManager.persist(course);
   }
 
-  public int createCourseStudentRelation(StudentCourseRelation scRelation) {
-    String sql = "INSERT INTO school.students_courses_checkouts(student_id,course_id) VALUES(?,?);";
-    return jdbcTemplate.update(sql, scRelation.getStudentId(), scRelation.getCourseId());
+  public void createCourseStudentRelation(StudentCourseRelation scRelation) {
+    entityManager.persist(scRelation);
   }
 
   public int rowsCount() {
     String sql = """
-                    SELECT SUM (COUNT) FROM (
+                  SELECT SUM (COUNT) FROM (
         SELECT COUNT(*) AS COUNT FROM school.students
         UNION ALL
         SELECT COUNT(*) AS COUNT FROM school.groups
@@ -47,7 +49,9 @@ public class GeneratorDataRepository {
         UNION ALL
         SELECT COUNT(*) AS COUNT FROM school.students_courses_checkouts
         ) AS counts;
-                    """;
-    return jdbcTemplate.queryForObject(sql, Integer.class);
+                  """;
+    Query query = entityManager.createNativeQuery(sql);
+    return ((Number) query.getSingleResult()).intValue();
   }
+
 }

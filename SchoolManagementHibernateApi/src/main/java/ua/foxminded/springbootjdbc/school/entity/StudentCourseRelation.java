@@ -2,6 +2,9 @@ package ua.foxminded.springbootjdbc.school.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Getter;
 
@@ -9,7 +12,12 @@ import lombok.Getter;
 @Entity
 @Table(name = "students_courses_checkouts", schema = "school")
 public class StudentCourseRelation {
-
+ 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "checkouts_id")
+  private Long id;
+  
   @Column(name = "student_id")
   private int studentId;
 
