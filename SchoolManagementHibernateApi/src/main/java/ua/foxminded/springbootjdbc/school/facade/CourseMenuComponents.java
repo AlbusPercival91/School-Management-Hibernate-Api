@@ -36,7 +36,7 @@ public class CourseMenuComponents {
       log.info(MenuConstants.COURSE_DESCRIPTION);
       String courseDescription = scan.nextLine();
       Course course = new Course(courseName, courseDescription);
-      log.info(courseService.createCourse(course) + " course added" + "\n" + MenuConstants.COURSE_MENU);
+      log.info("Course with ID:" + courseService.createCourse(course) + " added" + "\n" + MenuConstants.COURSE_MENU);
     } else {
       log.warn(MenuConstants.EMPTY_NOTE);
       log.info(MenuConstants.COURSE_MENU);

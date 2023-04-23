@@ -5,7 +5,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import java.util.Collections;
 import java.util.List;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,7 +34,7 @@ class CourseServiceMockitoTest {
 
   @MockBean
   private SchoolManager schoolManager;
-  
+
   private AutoCloseable closeable;
 
   @BeforeEach

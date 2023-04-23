@@ -14,17 +14,21 @@ import lombok.ToString;
 @Entity
 @Table(name = "course", schema = "school")
 public class Course {
-  
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "course_id")
-  private Long id;
-  
+  private int id;
+
   @Column(name = "course_name")
   private String courseName;
 
   @Column(name = "course_description")
   private String courseDescription;
+
+  public Course() {
+
+  }
 
   public Course(String courseName, String courseDescription) {
     this.courseName = courseName;

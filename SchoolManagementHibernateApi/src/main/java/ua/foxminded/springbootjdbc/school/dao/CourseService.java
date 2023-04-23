@@ -22,7 +22,7 @@ public class CourseService {
   public int createCourse(Course course) {
     int result = courseDao.createCourse(course);
 
-    if (result != 1) {
+    if (result < 1) {
       throw new IllegalStateException(WRONG);
     }
     return result;
