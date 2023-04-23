@@ -16,7 +16,7 @@ public class StudentCourseRelation {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "checkouts_id")
-  private Long id;
+  private int id;
   
   @Column(name = "student_id")
   private int studentId;
