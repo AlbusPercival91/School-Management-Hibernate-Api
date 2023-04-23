@@ -33,7 +33,7 @@ public class GroupMenuComponents {
     if (!groupName.isEmpty()
         && groupService.showAllGroups().stream().noneMatch(group -> group.getGroupName().equals(groupName))) {
       Group group = new Group(groupName);
-      log.info(groupService.createGroup(group) + " group added" + "\n" + MenuConstants.GROUP_MENU);
+      log.info("Course with ID:" + groupService.createGroup(group) + " added" + "\n" + MenuConstants.GROUP_MENU);
     } else {
       log.warn(MenuConstants.EMPTY_NOTE);
       log.info(MenuConstants.GROUP_MENU);

@@ -19,9 +19,13 @@ public class Group {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "group_id")
   private int id;
-  
+
   @Column(name = "group_name")
   private String groupName;
+
+  public Group() {
+
+  }
 
   public Group(String groupName) {
     this.groupName = groupName;

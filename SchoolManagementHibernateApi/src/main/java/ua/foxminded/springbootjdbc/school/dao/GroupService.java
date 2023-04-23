@@ -23,7 +23,7 @@ public class GroupService {
   public int createGroup(Group group) {
     int result = groupDao.createGroup(group);
 
-    if (result != 1) {
+    if (result < 1) {
       throw new IllegalStateException(WRONG);
     }
     return result;
