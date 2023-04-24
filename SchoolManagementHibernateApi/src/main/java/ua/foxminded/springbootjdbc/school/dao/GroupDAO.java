@@ -20,10 +20,11 @@ public class GroupDAO {
     this.entityManager = entityManager;
   }
 
-  public List<Group> findGroupsWithLessOrEqualsStudents(int students) {
-    TypedQuery<Group> query = entityManager
-        .createQuery("SELECT c FROM Group c JOIN c.students s GROUP BY c HAVING COUNT(s) <= :students", Group.class);
-    query.setParameter("students", students);
+  public List<Group> findGroupsWithLessOrEqualsStudents(Integer students) {
+    TypedQuery<Group> query = entityManager.createQuery(
+        "SELECT g FROM Group g JOIN Student s ON g.id = s.groupId GROUP BY g HAVING COUNT(s) <= :students",
+        Group.class);
+    query.setParameter("students", students.longValue());
     return query.getResultList();
   }
 
@@ -33,7 +34,7 @@ public class GroupDAO {
   }
 
   public int editGroupName(String groupName, String newGroupName) {
-    String jpql = "UPDATE Group c SET c.groupName = :newCGroupName WHERE c.courseName = :courseName";
+    String jpql = "UPDATE Group c SET c.groupName = :newGroupName WHERE c.groupName = :groupName";
     Query query = entityManager.createQuery(jpql);
     query.setParameter("newGroupName", newGroupName);
     query.setParameter("groupName", groupName);
