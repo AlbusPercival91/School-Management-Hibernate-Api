@@ -5,14 +5,14 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import ua.foxminded.springbootjdbc.school.dao.testdata.GeneratorDataService;
+import ua.foxminded.springbootjdbc.school.dao.testdata.JPAGeneratorDataService;
 import ua.foxminded.springbootjdbc.school.facade.SchoolManager;
 
 @Component
 public class SchoolRunner implements ApplicationRunner {
 
   @Autowired
-  private GeneratorDataService testData;
+  private JPAGeneratorDataService testData;
 
   @Autowired
   private SchoolManager schoolManager;

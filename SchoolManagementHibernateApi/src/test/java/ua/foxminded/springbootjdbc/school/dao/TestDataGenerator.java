@@ -3,7 +3,7 @@ package ua.foxminded.springbootjdbc.school.dao;
 import java.util.Map;
 import java.util.Set;
 
-import ua.foxminded.springbootjdbc.school.dao.testdata.GeneratorDataRepository;
+import ua.foxminded.springbootjdbc.school.dao.testdata.JPAGeneratorDataDao;
 import ua.foxminded.springbootjdbc.school.entity.Course;
 import ua.foxminded.springbootjdbc.school.entity.Group;
 import ua.foxminded.springbootjdbc.school.entity.Student;
@@ -16,10 +16,10 @@ public class TestDataGenerator {
   private final StudentMaker studentMaker;
   private final GroupMaker groupMaker;
   private final CourseMaker courseMaker;
-  private final GeneratorDataRepository dataRepository;
+  private final JPAGeneratorDataDao dataRepository;
 
   public TestDataGenerator(StudentMaker studentMaker, GroupMaker groupMaker, CourseMaker courseMaker,
-      GeneratorDataRepository dataRepository) {
+      JPAGeneratorDataDao dataRepository) {
     this.studentMaker = studentMaker;
     this.groupMaker = groupMaker;
     this.courseMaker = courseMaker;
