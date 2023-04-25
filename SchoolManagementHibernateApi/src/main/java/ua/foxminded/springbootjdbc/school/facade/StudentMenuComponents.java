@@ -49,7 +49,7 @@ public class StudentMenuComponents {
             groupId = null;
           }
           Student student = new Student(groupId, firstName, lastName);
-          log.info(studentService.addNewStudent(student) + " student added");
+          log.info("Student with ID:" + studentService.addNewStudent(student) + " added");
         } else {
           log.warn(MenuConstants.GROUP_ID_NOTE);
         }

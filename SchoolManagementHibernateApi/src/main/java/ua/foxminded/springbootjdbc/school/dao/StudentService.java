@@ -23,7 +23,7 @@ public class StudentService {
   public int addNewStudent(Student student) {
     int result = studentDao.addNewStudent(student);
 
-    if (result != 1) {
+    if (result == 0) {
       throw new IllegalStateException(WRONG);
     }
     return result;
@@ -59,7 +59,7 @@ public class StudentService {
     return result;
   }
 
-  public List<Object> showAllStudents() {
+  public List<Student> showAllStudents() {
     return studentDao.showAllStudents();
   }
 

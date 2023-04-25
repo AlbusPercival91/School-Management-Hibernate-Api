@@ -36,7 +36,7 @@ class StudentServiceMockitoTest {
 
   @MockBean
   private SchoolManager schoolManager;
-  
+
   private AutoCloseable closeable;
 
   @BeforeEach
@@ -134,11 +134,11 @@ class StudentServiceMockitoTest {
   @ParameterizedTest
   @CsvSource({ "1, Harry, Potter", "1, Ron, Wesley", "1, Herminone, Granger", "4, Draco, Malfoy " })
   void shouldShowAllStudents(int groupId, String name, String surname) {
-    List<Object> expected = new ArrayList<>();
+    List<Student> expected = new ArrayList<>();
     Student student = new Student(groupId, name, surname);
     expected.add(student);
     when(studentDAO.showAllStudents()).thenReturn(expected);
-    List<Object> actual = studentService.showAllStudents();
+    List<Student> actual = studentService.showAllStudents();
 
     Assertions.assertTrue(!expected.isEmpty() && !actual.isEmpty());
     Assertions.assertNotNull(student.getGroupId());

@@ -29,6 +29,10 @@ public class Student {
   @Column(name = "last_name")
   private String lastName;
 
+  public Student() {
+
+  }
+
   public Student(Integer groupId, String firstName, String lastName) {
     this.groupId = groupId;
     this.firstName = firstName;

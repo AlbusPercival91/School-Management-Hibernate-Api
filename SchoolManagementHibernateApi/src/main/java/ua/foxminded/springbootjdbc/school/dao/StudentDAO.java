@@ -1,86 +1,83 @@
 package ua.foxminded.springbootjdbc.school.dao;
 
 import java.util.List;
-
-import org.springframework.jdbc.core.JdbcTemplate;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
-
 import ua.foxminded.springbootjdbc.school.entity.Student;
-import ua.foxminded.springbootjdbc.school.mapper.StudentRowMapper;
+import ua.foxminded.springbootjdbc.school.entity.StudentCourseRelation;
 
 @Repository
+@Transactional
 public class StudentDAO {
 
-  private final JdbcTemplate jdbcTemplate;
+  @PersistenceContext
+  private final EntityManager entityManager;
 
-  public StudentDAO(JdbcTemplate jdbcTemplate) {
-    this.jdbcTemplate = jdbcTemplate;
+  public StudentDAO(EntityManager entityManager) {
+    this.entityManager = entityManager;
   }
 
   public int addNewStudent(Student student) {
-    String sql = "insert into school.students(group_id, first_name, last_name) values(?,?,?)";
-    return jdbcTemplate.update(sql, student.getGroupId(), student.getFirstName(), student.getLastName());
+    entityManager.persist(student);
+    return student.getId();
   }
 
   public int deleteStudentByID(int id) {
-    String sql = "delete from school.students where student_id = ?";
-    return jdbcTemplate.update(sql, id);
+    Query query = entityManager.createQuery("DELETE FROM Student s WHERE s.id = :id");
+    query.setParameter("id", id);
+    return query.executeUpdate();
   }
 
   public List<Integer> getStudentID() {
-    String sql = "select student_id from school.students;";
-    return jdbcTemplate.query(sql, (rs, rowNum) -> rs.getInt("student_id"));
+    String jpql = "SELECT s.id FROM Student s";
+    TypedQuery<Integer> query = entityManager.createQuery(jpql, Integer.class);
+    return query.getResultList();
   }
 
   public List<Student> findStudentsRelatedToCourse(String courseName) {
-    String sql = """
-        SELECT group_id, first_name, last_name FROM school.students
-        JOIN school.students_courses_checkouts
-        ON school.students_courses_checkouts.student_id = school.students.student_id
-        JOIN school.course ON school.students_courses_checkouts.course_id = school.course.course_id
-        WHERE school.course.course_name = ?
-              """;
-    return jdbcTemplate.query(sql, new StudentRowMapper(), courseName);
+    String jpql = "SELECT s FROM Student s JOIN s.courses c WHERE c.name = :courseName";
+    TypedQuery<Student> query = entityManager.createQuery(jpql, Student.class);
+    query.setParameter("courseName", courseName);
+    return query.getResultList();
   }
 
   public int addStudentToTheCourse(Integer studentId, String courseName) {
-    String sql = """
-              INSERT INTO school.students_courses_checkouts(student_id, course_id)
-              SELECT
-              (SELECT student_id FROM school.students WHERE student_id= ?),
-              (SELECT course_id FROM school.course WHERE course_name = ?);
-        """;
-    return jdbcTemplate.update(sql, studentId, courseName);
+    String jpql = "INSERT INTO StudentCourseRelation(student, course) " + "SELECT s, c FROM Student s, Course c "
+        + "WHERE s.id = :studentId AND c.name = :courseName";
+    TypedQuery<StudentCourseRelation> query = entityManager.createQuery(jpql, StudentCourseRelation.class);
+    query.setParameter("studentId", studentId);
+    query.setParameter("courseName", courseName);
+    return query.executeUpdate();
   }
 
   public int removeStudentFromCourse(Integer studentId, String courseName) {
-    String sql = """
-        DELETE
-        FROM school.students_courses_checkouts
-        WHERE student_id= ?
-        AND
-        course_id IN (SELECT course_id
-        FROM school.course
-        WHERE course_name = ?);
+    String jpql = """
+        DELETE FROM StudentCourseRelation sc
+        WHERE sc.student.id = :studentId
+        AND sc.course.id IN (SELECT c.id FROM Course c WHERE c.name = :courseName)
         """;
-    return jdbcTemplate.update(sql, studentId, courseName);
+    Query query = entityManager.createQuery(jpql);
+    query.setParameter("studentId", studentId);
+    query.setParameter("courseName", courseName);
+    return query.executeUpdate();
   }
 
   public int updateStudentById(Integer studentId, Student student) {
-    String sql = """
-        UPDATE school.students SET
-        group_id = ?,
-        first_name = ?,
-        last_name = ?
-        WHERE student_id = ?;
-                """;
-    return jdbcTemplate.update(sql, student.getGroupId(), student.getFirstName(), student.getLastName(), studentId);
+    String jpql = "UPDATE Student s SET s.groupId = :groupId, s.firstName = :firstName, s.lastName = :lastName WHERE s.id = :studentId";
+    Query query = entityManager.createQuery(jpql);
+    query.setParameter("groupId", student.getGroupId());
+    query.setParameter("firstName", student.getFirstName());
+    query.setParameter("lastName", student.getLastName());
+    query.setParameter("studentId", studentId);
+    return query.executeUpdate();
   }
 
-  public List<Object> showAllStudents() {
-    String sql = "SELECT * FROM school.students;";
-    return jdbcTemplate.query(sql,
-        (rs, rowNum) -> "ID: " + rs.getInt("student_id") + " Group_ID: " + rs.getInt("group_id") + " First_Name: "
-            + rs.getString("first_name") + " Last_Name: " + rs.getString("last_name"));
+  public List<Student> showAllStudents() {
+    TypedQuery<Student> query = entityManager.createQuery("SELECT s FROM Student s", Student.class);
+    return query.getResultList();
   }
 }
