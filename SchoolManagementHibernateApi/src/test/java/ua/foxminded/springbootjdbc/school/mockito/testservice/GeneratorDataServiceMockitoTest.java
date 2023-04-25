@@ -16,13 +16,14 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+
+import ua.foxminded.springbootjdbc.school.dao.testdata.GeneratorDataRepository;
+import ua.foxminded.springbootjdbc.school.dao.testdata.GeneratorDataService;
 import ua.foxminded.springbootjdbc.school.entity.Course;
 import ua.foxminded.springbootjdbc.school.entity.Group;
 import ua.foxminded.springbootjdbc.school.entity.Student;
 import ua.foxminded.springbootjdbc.school.entity.StudentCourseRelation;
 import ua.foxminded.springbootjdbc.school.facade.SchoolManager;
-import ua.foxminded.springbootjdbc.school.testdata.dao.GeneratorDataRepository;
-import ua.foxminded.springbootjdbc.school.testdata.dao.GeneratorDataService;
 
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)

@@ -11,11 +11,12 @@ import org.springframework.boot.test.autoconfigure.jdbc.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.*;
+
+import ua.foxminded.springbootjdbc.school.dao.testdata.GeneratorDataRepository;
 import ua.foxminded.springbootjdbc.school.entity.Group;
 import ua.foxminded.springbootjdbc.school.testdata.CourseMaker;
 import ua.foxminded.springbootjdbc.school.testdata.GroupMaker;
 import ua.foxminded.springbootjdbc.school.testdata.StudentMaker;
-import ua.foxminded.springbootjdbc.school.testdata.dao.GeneratorDataRepository;
 
 //@JdbcTest
 //@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)

@@ -4,8 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
+
+import ua.foxminded.springbootjdbc.school.dao.testdata.GeneratorDataService;
 import ua.foxminded.springbootjdbc.school.facade.SchoolManager;
-import ua.foxminded.springbootjdbc.school.testdata.dao.GeneratorDataService;
 
 @Component
 public class SchoolRunner implements ApplicationRunner {
