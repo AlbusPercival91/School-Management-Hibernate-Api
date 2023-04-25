@@ -7,12 +7,12 @@ import org.springframework.stereotype.Service;
 import ua.foxminded.springbootjdbc.school.entity.Group;
 
 @Service
-public class GroupService {
+public class JPAGroupService {
   private static final String WRONG = "oops something went wrong";
 
-  private final GroupDAO groupDao;
+  private final JPAGroupDao groupDao;
 
-  public GroupService(GroupDAO groupDao) {
+  public JPAGroupService(JPAGroupDao groupDao) {
     this.groupDao = groupDao;
   }
 

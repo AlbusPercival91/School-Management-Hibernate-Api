@@ -6,12 +6,12 @@ import org.springframework.stereotype.Service;
 import ua.foxminded.springbootjdbc.school.entity.Course;
 
 @Service
-public class CourseService {
+public class JPACourseService {
   private static final String WRONG = "oops something went wrong";
 
-  private final CourseDAO courseDao;
+  private final JPACourseDao courseDao;
 
-  public CourseService(CourseDAO courseDao) {
+  public JPACourseService(JPACourseDao courseDao) {
     this.courseDao = courseDao;
   }
 

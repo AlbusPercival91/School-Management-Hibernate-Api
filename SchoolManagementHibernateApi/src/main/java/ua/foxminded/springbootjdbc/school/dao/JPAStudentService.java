@@ -7,12 +7,12 @@ import org.springframework.stereotype.Service;
 import ua.foxminded.springbootjdbc.school.entity.Student;
 
 @Service
-public class StudentService {
+public class JPAStudentService {
   private static final String WRONG = "oops something went wrong";
 
-  private final StudentDAO studentDao;
+  private final JPAStudentDao studentDao;
 
-  public StudentService(StudentDAO studentDao) {
+  public JPAStudentService(JPAStudentDao studentDao) {
     this.studentDao = studentDao;
   }
 

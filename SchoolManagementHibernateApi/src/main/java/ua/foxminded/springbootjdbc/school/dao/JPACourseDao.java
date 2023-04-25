@@ -11,12 +11,12 @@ import ua.foxminded.springbootjdbc.school.entity.Course;
 
 @Repository
 @Transactional
-public class CourseDAO {
+public class JPACourseDao {
 
   @PersistenceContext
   private final EntityManager entityManager;
 
-  public CourseDAO(EntityManager entityManager) {
+  public JPACourseDao(EntityManager entityManager) {
     this.entityManager = entityManager;
   }
 

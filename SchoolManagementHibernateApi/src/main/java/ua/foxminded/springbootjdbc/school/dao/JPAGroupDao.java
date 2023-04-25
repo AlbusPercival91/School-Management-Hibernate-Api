@@ -11,12 +11,12 @@ import ua.foxminded.springbootjdbc.school.entity.Group;
 
 @Repository
 @Transactional
-public class GroupDAO {
+public class JPAGroupDao {
 
   @PersistenceContext
   private final EntityManager entityManager;
 
-  public GroupDAO(EntityManager entityManager) {
+  public JPAGroupDao(EntityManager entityManager) {
     this.entityManager = entityManager;
   }
 

@@ -19,8 +19,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import ua.foxminded.springbootjdbc.school.dao.StudentDAO;
-import ua.foxminded.springbootjdbc.school.dao.StudentService;
+import ua.foxminded.springbootjdbc.school.dao.JPAStudentDao;
+import ua.foxminded.springbootjdbc.school.dao.JPAStudentService;
 import ua.foxminded.springbootjdbc.school.entity.Student;
 import ua.foxminded.springbootjdbc.school.facade.SchoolManager;
 
@@ -29,10 +29,10 @@ import ua.foxminded.springbootjdbc.school.facade.SchoolManager;
 class StudentServiceMockitoTest {
 
   @Autowired
-  private StudentService studentService;
+  private JPAStudentService studentService;
 
   @MockBean
-  private StudentDAO studentDAO;
+  private JPAStudentDao studentDAO;
 
   @MockBean
   private SchoolManager schoolManager;

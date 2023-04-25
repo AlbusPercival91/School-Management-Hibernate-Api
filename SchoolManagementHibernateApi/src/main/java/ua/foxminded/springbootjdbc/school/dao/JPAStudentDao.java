@@ -12,12 +12,12 @@ import ua.foxminded.springbootjdbc.school.entity.StudentCourseRelation;
 
 @Repository
 @Transactional
-public class StudentDAO {
+public class JPAStudentDao {
 
   @PersistenceContext
   private final EntityManager entityManager;
 
-  public StudentDAO(EntityManager entityManager) {
+  public JPAStudentDao(EntityManager entityManager) {
     this.entityManager = entityManager;
   }
 

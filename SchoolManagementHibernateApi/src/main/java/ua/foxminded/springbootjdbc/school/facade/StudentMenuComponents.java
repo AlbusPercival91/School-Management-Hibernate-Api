@@ -3,17 +3,17 @@ package ua.foxminded.springbootjdbc.school.facade;
 import java.util.Scanner;
 import org.springframework.stereotype.Component;
 import lombok.extern.slf4j.Slf4j;
-import ua.foxminded.springbootjdbc.school.dao.CourseService;
-import ua.foxminded.springbootjdbc.school.dao.StudentService;
+import ua.foxminded.springbootjdbc.school.dao.JPACourseService;
+import ua.foxminded.springbootjdbc.school.dao.JPAStudentService;
 import ua.foxminded.springbootjdbc.school.entity.Student;
 
 @Slf4j
 @Component
 public class StudentMenuComponents {
-  private final StudentService studentService;
-  private final CourseService courseService;
+  private final JPAStudentService studentService;
+  private final JPACourseService courseService;
 
-  public StudentMenuComponents(StudentService studentService, CourseService courseService) {
+  public StudentMenuComponents(JPAStudentService studentService, JPACourseService courseService) {
     this.studentService = studentService;
     this.courseService = courseService;
   }

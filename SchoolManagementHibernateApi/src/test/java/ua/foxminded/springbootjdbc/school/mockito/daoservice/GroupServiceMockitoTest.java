@@ -18,8 +18,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import ua.foxminded.springbootjdbc.school.dao.GroupDAO;
-import ua.foxminded.springbootjdbc.school.dao.GroupService;
+import ua.foxminded.springbootjdbc.school.dao.JPAGroupDao;
+import ua.foxminded.springbootjdbc.school.dao.JPAGroupService;
 import ua.foxminded.springbootjdbc.school.entity.Group;
 import ua.foxminded.springbootjdbc.school.facade.SchoolManager;
 
@@ -28,10 +28,10 @@ import ua.foxminded.springbootjdbc.school.facade.SchoolManager;
 class GroupServiceMockitoTest {
 
   @Autowired
-  private GroupService groupService;
+  private JPAGroupService groupService;
 
   @MockBean
-  private GroupDAO groupDAO;
+  private JPAGroupDao groupDAO;
 
   @MockBean
   private SchoolManager schoolManager;

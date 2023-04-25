@@ -3,15 +3,15 @@ package ua.foxminded.springbootjdbc.school.facade;
 import java.util.Scanner;
 import org.springframework.stereotype.Component;
 import lombok.extern.slf4j.Slf4j;
-import ua.foxminded.springbootjdbc.school.dao.GroupService;
+import ua.foxminded.springbootjdbc.school.dao.JPAGroupService;
 import ua.foxminded.springbootjdbc.school.entity.Group;
 
 @Slf4j
 @Component
 public class GroupMenuComponents {
-  private final GroupService groupService;
+  private final JPAGroupService groupService;
 
-  public GroupMenuComponents(GroupService groupService) {
+  public GroupMenuComponents(JPAGroupService groupService) {
     this.groupService = groupService;
   }
 
