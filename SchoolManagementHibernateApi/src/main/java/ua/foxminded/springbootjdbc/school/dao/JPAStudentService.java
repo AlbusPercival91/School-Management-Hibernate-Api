@@ -1,18 +1,17 @@
 package ua.foxminded.springbootjdbc.school.dao;
 
 import java.util.List;
-
 import org.springframework.stereotype.Service;
-
+import ua.foxminded.springbootjdbc.school.dao.interfaces.StudentDao;
 import ua.foxminded.springbootjdbc.school.entity.Student;
 
 @Service
 public class JPAStudentService {
   private static final String WRONG = "oops something went wrong";
 
-  private final JPAStudentDao studentDao;
+  private final StudentDao studentDao;
 
-  public JPAStudentService(JPAStudentDao studentDao) {
+  public JPAStudentService(StudentDao studentDao) {
     this.studentDao = studentDao;
   }
 

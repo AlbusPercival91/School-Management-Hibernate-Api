@@ -2,16 +2,16 @@ package ua.foxminded.springbootjdbc.school.dao;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
-
+import ua.foxminded.springbootjdbc.school.dao.interfaces.CourseDao;
 import ua.foxminded.springbootjdbc.school.entity.Course;
 
 @Service
 public class JPACourseService {
   private static final String WRONG = "oops something went wrong";
 
-  private final JPACourseDao courseDao;
+  private final CourseDao courseDao;
 
-  public JPACourseService(JPACourseDao courseDao) {
+  public JPACourseService(CourseDao courseDao) {
     this.courseDao = courseDao;
   }
 

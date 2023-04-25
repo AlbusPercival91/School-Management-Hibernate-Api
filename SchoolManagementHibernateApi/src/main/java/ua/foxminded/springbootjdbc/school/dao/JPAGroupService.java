@@ -1,18 +1,17 @@
 package ua.foxminded.springbootjdbc.school.dao;
 
 import java.util.List;
-
 import org.springframework.stereotype.Service;
-
+import ua.foxminded.springbootjdbc.school.dao.interfaces.GroupDao;
 import ua.foxminded.springbootjdbc.school.entity.Group;
 
 @Service
 public class JPAGroupService {
   private static final String WRONG = "oops something went wrong";
 
-  private final JPAGroupDao groupDao;
+  private final GroupDao groupDao;
 
-  public JPAGroupService(JPAGroupDao groupDao) {
+  public JPAGroupService(GroupDao groupDao) {
     this.groupDao = groupDao;
   }
 
