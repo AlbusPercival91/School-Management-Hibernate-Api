@@ -2,9 +2,9 @@ package ua.foxminded.springbootjdbc.school.dao.testdata;
 
 import java.util.Map;
 import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ua.foxminded.springbootjdbc.school.dao.interfaces.GeneratorDataDao;
 import ua.foxminded.springbootjdbc.school.entity.Course;
 import ua.foxminded.springbootjdbc.school.entity.Group;
 import ua.foxminded.springbootjdbc.school.entity.Student;
@@ -25,9 +25,9 @@ public class JPAGeneratorDataService {
   @Autowired
   private GroupMaker groupMaker;
 
-  private final JPAGeneratorDataDao dataRepository;
+  private final GeneratorDataDao dataRepository;
 
-  public JPAGeneratorDataService(JPAGeneratorDataDao dataRepository) {
+  public JPAGeneratorDataService(GeneratorDataDao dataRepository) {
     this.dataRepository = dataRepository;
   }
 
