@@ -7,11 +7,12 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
+import ua.foxminded.springbootjdbc.school.dao.interfaces.GroupDao;
 import ua.foxminded.springbootjdbc.school.entity.Group;
 
 @Repository
 @Transactional
-public class JPAGroupDao {
+public class JPAGroupDao implements GroupDao {
 
   @PersistenceContext
   private final EntityManager entityManager;
@@ -20,6 +21,7 @@ public class JPAGroupDao {
     this.entityManager = entityManager;
   }
 
+  @Override
   public List<Group> findGroupsWithLessOrEqualsStudents(Integer students) {
     TypedQuery<Group> query = entityManager.createQuery(
         "SELECT g FROM Group g JOIN Student s ON g.id = s.groupId GROUP BY g HAVING COUNT(s) <= :students",
@@ -28,11 +30,13 @@ public class JPAGroupDao {
     return query.getResultList();
   }
 
+  @Override
   public int createGroup(Group group) {
     entityManager.persist(group);
     return group.getId();
   }
 
+  @Override
   public int editGroupName(String groupName, String newGroupName) {
     String jpql = "UPDATE Group c SET c.groupName = :newGroupName WHERE c.groupName = :groupName";
     Query query = entityManager.createQuery(jpql);
@@ -41,6 +45,7 @@ public class JPAGroupDao {
     return query.executeUpdate();
   }
 
+  @Override
   public int deleteGroupByName(String groupName) {
     String jpql = "DELETE FROM Group c WHERE c.groupName = :groupName";
     Query query = entityManager.createQuery(jpql);
@@ -48,6 +53,7 @@ public class JPAGroupDao {
     return query.executeUpdate();
   }
 
+  @Override
   public List<Group> showAllGroups() {
     TypedQuery<Group> query = entityManager.createQuery("SELECT c FROM Group c", Group.class);
     return query.getResultList();

@@ -7,12 +7,13 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
+import ua.foxminded.springbootjdbc.school.dao.interfaces.StudentDao;
 import ua.foxminded.springbootjdbc.school.entity.Student;
 import ua.foxminded.springbootjdbc.school.entity.StudentCourseRelation;
 
 @Repository
 @Transactional
-public class JPAStudentDao {
+public class JPAStudentDao implements StudentDao {
 
   @PersistenceContext
   private final EntityManager entityManager;
@@ -21,23 +22,27 @@ public class JPAStudentDao {
     this.entityManager = entityManager;
   }
 
+  @Override
   public int addNewStudent(Student student) {
     entityManager.persist(student);
     return student.getId();
   }
 
+  @Override
   public int deleteStudentByID(int id) {
     Query query = entityManager.createQuery("DELETE FROM Student s WHERE s.id = :id");
     query.setParameter("id", id);
     return query.executeUpdate();
   }
 
+  @Override
   public List<Integer> getStudentID() {
     String jpql = "SELECT s.id FROM Student s";
     TypedQuery<Integer> query = entityManager.createQuery(jpql, Integer.class);
     return query.getResultList();
   }
 
+  @Override
   public List<Student> findStudentsRelatedToCourse(String courseName) {
     String jpql = "SELECT s FROM Student s JOIN s.courses c WHERE c.name = :courseName";
     TypedQuery<Student> query = entityManager.createQuery(jpql, Student.class);
@@ -45,6 +50,7 @@ public class JPAStudentDao {
     return query.getResultList();
   }
 
+  @Override
   public int addStudentToTheCourse(Integer studentId, String courseName) {
     String jpql = "INSERT INTO StudentCourseRelation(student, course) " + "SELECT s, c FROM Student s, Course c "
         + "WHERE s.id = :studentId AND c.name = :courseName";
@@ -54,6 +60,7 @@ public class JPAStudentDao {
     return query.executeUpdate();
   }
 
+  @Override
   public int removeStudentFromCourse(Integer studentId, String courseName) {
     String jpql = """
         DELETE FROM StudentCourseRelation sc
@@ -66,6 +73,7 @@ public class JPAStudentDao {
     return query.executeUpdate();
   }
 
+  @Override
   public int updateStudentById(Integer studentId, Student student) {
     String jpql = "UPDATE Student s SET s.groupId = :groupId, s.firstName = :firstName, s.lastName = :lastName WHERE s.id = :studentId";
     Query query = entityManager.createQuery(jpql);
@@ -76,6 +84,7 @@ public class JPAStudentDao {
     return query.executeUpdate();
   }
 
+  @Override
   public List<Student> showAllStudents() {
     TypedQuery<Student> query = entityManager.createQuery("SELECT s FROM Student s", Student.class);
     return query.getResultList();
