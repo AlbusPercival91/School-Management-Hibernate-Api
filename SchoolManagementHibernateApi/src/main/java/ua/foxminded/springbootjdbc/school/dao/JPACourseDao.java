@@ -23,7 +23,7 @@ public class JPACourseDao implements CourseDao {
 
   @Override
   public List<Course> findCoursesWithLessOrEqualsStudents(Integer students) {
-    String jpql = "SELECT c FROM Course c JOIN c.students s GROUP BY c.id HAVING COUNT(s.id) <= :students";
+    String jpql = "SELECT c FROM Course c JOIN StudentCourseRelation scr ON c.id = scr.courseId GROUP BY c HAVING COUNT(scr) <= :students";
     TypedQuery<Course> query = entityManager.createQuery(jpql, Course.class);
     query.setParameter("students", students.longValue());
     return query.getResultList();

@@ -2,7 +2,6 @@ package ua.foxminded.springbootjdbc.school.entity;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,6 +31,7 @@ public class Course {
   @Column(name = "course_description")
   private String courseDescription;
 
+  @ToString.Exclude
   @ManyToMany(mappedBy = "courses", cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
   private Set<Student> students = new HashSet<>();
 
