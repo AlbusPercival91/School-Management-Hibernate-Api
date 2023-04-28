@@ -5,7 +5,7 @@ import ua.foxminded.springbootjdbc.school.entity.Course;
 
 public interface CourseDao {
 
-  List<Course> findCoursesWithLessOrEqualsStudents(int students);
+  List<Course> findCoursesWithLessOrEqualsStudents(Integer students);
 
   int createCourse(Course course);
 

@@ -29,7 +29,7 @@ public class JPAStudentDao implements StudentDao {
   }
 
   @Override
-  public int deleteStudentByID(int id) {
+  public int deleteStudentByID(Integer id) {
     Query query = entityManager.createQuery("DELETE FROM Student s WHERE s.id = :id");
     query.setParameter("id", id);
     return query.executeUpdate();

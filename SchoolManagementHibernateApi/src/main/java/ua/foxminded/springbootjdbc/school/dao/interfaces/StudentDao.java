@@ -7,7 +7,7 @@ public interface StudentDao {
 
   int addNewStudent(Student student);
 
-  int deleteStudentByID(int id);
+  int deleteStudentByID(Integer id);
 
   List<Integer> getStudentID();
 
