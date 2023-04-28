@@ -9,7 +9,6 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 import ua.foxminded.springbootjdbc.school.dao.interfaces.StudentDao;
 import ua.foxminded.springbootjdbc.school.entity.Student;
-import ua.foxminded.springbootjdbc.school.entity.StudentCourseRelation;
 
 @Repository
 @Transactional
@@ -56,9 +55,12 @@ public class JPAStudentDao implements StudentDao {
 
   @Override
   public int addStudentToTheCourse(Integer studentId, String courseName) {
-    String jpql = "INSERT INTO StudentCourseRelation(student, course) " + "SELECT s, c FROM Student s, Course c "
-        + "WHERE s.id = :studentId AND c.name = :courseName";
-    TypedQuery<StudentCourseRelation> query = entityManager.createQuery(jpql, StudentCourseRelation.class);
+    String jpql = """
+        INSERT INTO StudentCourseRelation (studentId, courseId)
+        SELECT s.id, c.id FROM Student s, Course c
+        WHERE s.id = :studentId AND c.courseName = :courseName
+                """;
+    Query query = entityManager.createQuery(jpql);
     query.setParameter("studentId", studentId);
     query.setParameter("courseName", courseName);
     return query.executeUpdate();
@@ -69,7 +71,7 @@ public class JPAStudentDao implements StudentDao {
     String jpql = """
         DELETE FROM StudentCourseRelation sc
         WHERE sc.student.id = :studentId
-        AND sc.course.id IN (SELECT c.id FROM Course c WHERE c.name = :courseName)
+        AND sc.course.id IN (SELECT c.id FROM Course c WHERE c.courseName = :courseName)
         """;
     Query query = entityManager.createQuery(jpql);
     query.setParameter("studentId", studentId);
