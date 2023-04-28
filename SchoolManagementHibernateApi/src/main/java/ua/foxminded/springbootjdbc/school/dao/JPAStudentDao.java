@@ -44,7 +44,11 @@ public class JPAStudentDao implements StudentDao {
 
   @Override
   public List<Student> findStudentsRelatedToCourse(String courseName) {
-    String jpql = "SELECT s FROM Student s JOIN s.courses c WHERE c.name = :courseName";
+    String jpql = """
+        SELECT s FROM Student s
+        JOIN StudentCourseRelation scr ON s.id = scr.studentId
+        JOIN Course c ON c.id = scr.courseId WHERE c.courseName = :courseName
+        """;
     TypedQuery<Student> query = entityManager.createQuery(jpql, Student.class);
     query.setParameter("courseName", courseName);
     return query.getResultList();
