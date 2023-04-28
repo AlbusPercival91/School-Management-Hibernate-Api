@@ -69,9 +69,9 @@ public class JPAStudentDao implements StudentDao {
   @Override
   public int removeStudentFromCourse(Integer studentId, String courseName) {
     String jpql = """
-        DELETE FROM StudentCourseRelation sc
-        WHERE sc.student.id = :studentId
-        AND sc.course.id IN (SELECT c.id FROM Course c WHERE c.courseName = :courseName)
+        DELETE FROM StudentCourseRelation scr
+        WHERE scr.studentId = :studentId
+        AND scr.courseId IN (SELECT c.id FROM Course c WHERE c.courseName = :courseName)
         """;
     Query query = entityManager.createQuery(jpql);
     query.setParameter("studentId", studentId);
