@@ -16,14 +16,14 @@ public class TestDataGenerator {
   private final StudentMaker studentMaker;
   private final GroupMaker groupMaker;
   private final CourseMaker courseMaker;
-  private final JPAGeneratorDataDao dataRepository;
+  private final JPAGeneratorDataDao generatorDataDao;
 
   public TestDataGenerator(StudentMaker studentMaker, GroupMaker groupMaker, CourseMaker courseMaker,
-      JPAGeneratorDataDao dataRepository) {
+      JPAGeneratorDataDao generatorDataDao) {
     this.studentMaker = studentMaker;
     this.groupMaker = groupMaker;
     this.courseMaker = courseMaker;
-    this.dataRepository = dataRepository;
+    this.generatorDataDao = generatorDataDao;
   }
 
   public void createStudent() {
@@ -32,21 +32,21 @@ public class TestDataGenerator {
     for (String s : studentMaker.generateStudents(studentMaker.generateNames(20), studentMaker.generateSurnames(20))) {
       Student student = new Student(groupMaker.assignGroupId().get(i++), s.substring(0, s.indexOf(" ")),
           s.substring(s.indexOf(" ")));
-      dataRepository.createStudent(student);
+      generatorDataDao.createStudent(student);
     }
   }
 
   public void createGroup() {
     for (String s : groupMaker.generateGroups()) {
       Group group = new Group(s);
-      dataRepository.createGroup(group);
+      generatorDataDao.createGroup(group);
     }
   }
 
   public void createCourse() {
     for (String s : courseMaker.generateCourses()) {
       Course course = new Course(s, "TBD");
-      dataRepository.createCourse(course);
+      generatorDataDao.createCourse(course);
     }
   }
 
@@ -57,7 +57,7 @@ public class TestDataGenerator {
 
       for (Integer i : value) {
         StudentCourseRelation scRelation = new StudentCourseRelation(key, i);
-        dataRepository.createCourseStudentRelation(scRelation);
+        generatorDataDao.createCourseStudentRelation(scRelation);
       }
     }
   }
