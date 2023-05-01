@@ -44,7 +44,6 @@ class JPAStudentDaoTest {
   }
 
   @Test
-  @DisplayName("Should return true if number of students at course more than zero")
   void testFindStudentsRelatedToCourse_ShouldReturnNameOfCourses() {
     testData.createCourse();
     testData.createStudent();
@@ -58,7 +57,6 @@ class JPAStudentDaoTest {
   }
 
   @ParameterizedTest
-  @DisplayName("Should return 1 if 1 student assigned to one course")
   @CsvSource({ "12, Art", "190, Literature", "19, Computer Science", "21, Geography", "193, Physical Science",
       "1, Life Science", "9, English", "2, Mathematics", "150, Sports", "7, History" })
   void testAddStudentToTheCourse_ShouldReturnOneIfStudentAssigned(int studentId, String course) {
@@ -69,7 +67,6 @@ class JPAStudentDaoTest {
   }
 
   @Test
-  @DisplayName("Should return true when actual and inserted student are equals")
   void testAddNewStudent_ShouldReturnEqualsWhenNewStudentCreated() {
     Student student = new Student(4, "Harry", "Potter");
     studentDao.addNewStudent(student);
@@ -81,7 +78,6 @@ class JPAStudentDaoTest {
   }
 
   @Test
-  @DisplayName("Should return 1 if student deleted from DB")
   void testDeleteStudentByID_ShouldReturnOneIfStudentRemoved() {
     Student student = new Student(1, "Albus", "Dambldor");
     entityManager.persist(student);
@@ -92,7 +88,6 @@ class JPAStudentDaoTest {
   }
 
   @Test
-  @DisplayName("Should return 1 if student deleted from course Table in DB")
   void testRemoveStudentFromCourse_ShouldReturnOneIfStudentRemovedFromCourse() {
     testData.createCourse();
     testData.createStudent();
@@ -106,13 +101,14 @@ class JPAStudentDaoTest {
     Assertions.assertEquals(1, deleted);
   }
 
-  @Test
-  @DisplayName("Should return 1 if student updated")
-  void testUpdateStudentById_ShouldReturnEqualsStringsWhenStudentUpdated() {
-    Student student = new Student(4, "Harry", "Potter");
+  @ParameterizedTest
+  @CsvSource({ "4, Harry, Potter, 3, Ron, Wesley", "6, Draco, Malfoy, 7, Hermione, Granger" })
+  void testUpdateStudentById_ShouldReturnEqualsStringsWhenStudentUpdated(int groupId, String name, String lastName,
+      int newGroupId, String newName, String newLastName) {
+    Student student = new Student(groupId, name, lastName);
     entityManager.persist(student);
     entityManager.flush();
-    Student updatedStudent = new Student(3, "Ron", "Wesley");
+    Student updatedStudent = new Student(newGroupId, newName, newLastName);
     studentDao.updateStudentById(student.getId(), updatedStudent);
     entityManager.clear();
     Student actualStudent = entityManager.find(Student.class, student.getId());
@@ -125,7 +121,6 @@ class JPAStudentDaoTest {
   }
 
   @Test
-  @DisplayName("Should return all students")
   void testShowAllStudents_ShouldReturnAllStudents() {
     testData.createStudent();
     List<Student> actual = studentDao.showAllStudents();
