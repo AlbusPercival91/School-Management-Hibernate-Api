@@ -48,7 +48,7 @@ class JPACourseDaoTest {
 
   @ParameterizedTest
   @CsvSource({ "40", "100", "70" })
-  void should_return_courses_with_less_or_equals_students(int number) {
+  void testFindCoursesWithLessOrEqualsStudents_ShouldReturnCoursesWithLessOrEqualsStudents(int number) {
     testData.createStudent();
     testData.createCourse();
     testData.createCourseStudentRelation();
@@ -59,7 +59,7 @@ class JPACourseDaoTest {
   }
 
   @Test
-  void should_return_empty_list_when_students_is_zero() {
+  void testFindCoursesWithLessOrEqualsStudents_WhenStudentsZero_ShouldReturnEmptyList() {
     testData.createStudent();
     testData.createCourse();
     testData.createCourseStudentRelation();
@@ -71,8 +71,8 @@ class JPACourseDaoTest {
   @ParameterizedTest
   @CsvSource({ "History, TBD, Geography, TBD-2", "Art, TBD, Paint, TBD-3", "Sports, TBD, Yoga, TBD-5",
       "English, TBD, Spanish, TBD-6", "123, TBD, 321, asdf", "%$#, TBD, $%^&, TBDTBD", "!@-@$, )&-%^, Swimming, TBD" })
-  void should_return_1_if_1_course_updated(String courseName, String courseDescription, String newCourseName,
-      String newCourseDescription) {
+  void testEditCourseNameAndDescription_ShouldReturnOneIfCourseUpdated(String courseName, String courseDescription,
+      String newCourseName, String newCourseDescription) {
     Course course = new Course(courseName, courseDescription);
     courseDao.createCourse(course);
 
@@ -83,7 +83,7 @@ class JPACourseDaoTest {
   @ParameterizedTest
   @DisplayName("Should return 1 if 1 course deleted")
   @CsvSource({ "History, TBD", "Swimming, TBD", "Paint, TBD-3", "Spanish, TBD-6", "Geography, TBD-2" })
-  void should_return_1_if_1_course_deleted(String courseName, String courseDescription) {
+  void testDeleteCourseByName_ShouldReturnOneIfCourseDeleted(String courseName, String courseDescription) {
     Course course = new Course(courseName, courseDescription);
     courseDao.createCourse(course);
 
@@ -92,7 +92,7 @@ class JPACourseDaoTest {
 
   @Test
   @DisplayName("Should return 10 when initiated course test data")
-  void should_return_all_courses() {
+  void testShowAllCourses_ShouldReturnAllCourses() {
     testData.createCourse();
     List<Course> actual = courseDao.showAllCourses();
 
