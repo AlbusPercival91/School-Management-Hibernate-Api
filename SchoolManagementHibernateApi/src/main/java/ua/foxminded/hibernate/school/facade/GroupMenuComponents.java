@@ -22,7 +22,8 @@ public class GroupMenuComponents {
       int quant = scan.nextInt();
       groupService.findGroupsWithLessOrEqualsStudents(quant).stream().map(Group::toString).forEach(log::info);
     } else {
-      log.warn(MenuConstants.DIGITS_REQUIRED + "\n" + MenuConstants.GROUP_MENU);
+      log.warn(MenuConstants.DIGITS_REQUIRED);
+      log.info(MenuConstants.GROUP_MENU);
     }
   }
 

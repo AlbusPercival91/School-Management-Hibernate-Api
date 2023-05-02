@@ -19,8 +19,9 @@ public class StudentMenuComponents {
   }
 
   public void findStudentsRelatedToCourseFacade(Scanner scan) {
-    log.info(MenuConstants.COURSE_NAME);
-    String courseName = scan.nextLine();
+    log.info(MenuConstants.COURSE_LIST);
+    courseService.showAllCourses().forEach(course -> log.info(course.toString()));
+    String courseName = scan.next();
 
     if (courseService.showAllCourses().stream().anyMatch(course -> course.getCourseName().equals(courseName))) {
       studentService.findStudentsRelatedToCourse(courseName).forEach(student -> log.info(student.toString()));
