@@ -14,8 +14,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.*;
-
-import ua.foxminded.hibernate.school.dao.JPAGroupDao;
 import ua.foxminded.hibernate.school.dao.interfaces.GroupDao;
 import ua.foxminded.hibernate.school.dao.testdata.JPAGeneratorDataDao;
 import ua.foxminded.hibernate.school.entity.Group;

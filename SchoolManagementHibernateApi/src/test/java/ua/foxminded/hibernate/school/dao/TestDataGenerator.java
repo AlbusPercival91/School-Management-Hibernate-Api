@@ -2,7 +2,6 @@ package ua.foxminded.hibernate.school.dao;
 
 import java.util.Map;
 import java.util.Set;
-
 import ua.foxminded.hibernate.school.dao.testdata.JPAGeneratorDataDao;
 import ua.foxminded.hibernate.school.entity.Course;
 import ua.foxminded.hibernate.school.entity.Group;
