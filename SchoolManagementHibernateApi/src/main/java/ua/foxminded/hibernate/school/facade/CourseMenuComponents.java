@@ -23,7 +23,6 @@ public class CourseMenuComponents {
       courseService.findCoursesWithLessOrEqualsStudents(quant).stream().map(Course::toString).forEach(log::info);
     } else {
       log.warn(MenuConstants.DIGITS_REQUIRED);
-      log.info(MenuConstants.COURSE_MENU);
     }
   }
 

@@ -23,7 +23,6 @@ public class GroupMenuComponents {
       groupService.findGroupsWithLessOrEqualsStudents(quant).stream().map(Group::toString).forEach(log::info);
     } else {
       log.warn(MenuConstants.DIGITS_REQUIRED);
-      log.info(MenuConstants.GROUP_MENU);
     }
   }
 

@@ -25,10 +25,8 @@ public class StudentMenuComponents {
 
     if (courseService.showAllCourses().stream().anyMatch(course -> course.getCourseName().equals(courseName))) {
       studentService.findStudentsRelatedToCourse(courseName).forEach(student -> log.info(student.toString()));
-      log.info("\n" + MenuConstants.STUDENT_MENU);
     } else {
       log.warn(MenuConstants.WRONG_COURSE);
-      log.info(MenuConstants.STUDENT_MENU);
     }
   }
 
