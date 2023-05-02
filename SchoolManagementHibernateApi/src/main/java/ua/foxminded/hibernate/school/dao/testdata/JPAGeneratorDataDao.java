@@ -5,7 +5,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
-
 import ua.foxminded.hibernate.school.dao.interfaces.GeneratorDataDao;
 import ua.foxminded.hibernate.school.entity.Course;
 import ua.foxminded.hibernate.school.entity.Group;

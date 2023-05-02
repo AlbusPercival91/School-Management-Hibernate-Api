@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import ua.foxminded.hibernate.school.dao.interfaces.GeneratorDataDao;
 import ua.foxminded.hibernate.school.entity.Course;
 import ua.foxminded.hibernate.school.entity.Group;
