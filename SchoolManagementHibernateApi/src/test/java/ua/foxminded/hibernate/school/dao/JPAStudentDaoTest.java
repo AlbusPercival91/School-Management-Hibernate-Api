@@ -87,6 +87,13 @@ class JPAStudentDaoTest {
     Assertions.assertEquals(1, deleted);
   }
 
+  void testGetStudentID_ShouldReturnAllStudentsID() {
+    testData.createStudent();
+    List<Integer> actual = studentDao.getStudentID();
+
+    Assertions.assertEquals(200, actual.size());
+  }
+
   @Test
   void testRemoveStudentFromCourse_ShouldReturnOneIfStudentRemovedFromCourse() {
     testData.createCourse();

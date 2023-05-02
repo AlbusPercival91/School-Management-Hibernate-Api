@@ -6,7 +6,6 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -104,6 +103,20 @@ class JPAStudentServiceMockitoTest {
     Assertions.assertNotNull(actualCount);
     Assertions.assertEquals(expectedCount, actualCount);
     verify(studentDAO).deleteStudentByID(studentId);
+  }
+
+  @ParameterizedTest
+  @CsvSource({ "1, Harry, Potter", "1, Ron, Wesley", "1, Herminone, Granger", "4, Draco, Malfoy " })
+  void shouldReturnAllStudentsID(int groupId, String name, String surname) {
+    List<Integer> expected = new ArrayList<>();
+    Student student = new Student(groupId, name, surname);
+    expected.add(student.getId());
+    when(studentDAO.getStudentID()).thenReturn(expected);
+    List<Integer> actual = studentService.getStudentID();
+
+    Assertions.assertTrue(!expected.isEmpty() && !actual.isEmpty());
+    Assertions.assertEquals(expected, actual);
+    verify(studentDAO).getStudentID();
   }
 
   @ParameterizedTest
