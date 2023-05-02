@@ -25,7 +25,7 @@ import ua.foxminded.hibernate.school.facade.SchoolManager;
 
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-class CourseServiceMockitoTest {
+class JPACourseServiceMockitoTest {
 
   @Autowired
   private JPACourseService courseService;

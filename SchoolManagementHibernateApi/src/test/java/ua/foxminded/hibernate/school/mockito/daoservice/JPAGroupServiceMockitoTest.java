@@ -26,7 +26,7 @@ import ua.foxminded.hibernate.school.facade.SchoolManager;
 
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-class GroupServiceMockitoTest {
+class JPAGroupServiceMockitoTest {
 
   @Autowired
   private JPAGroupService groupService;
