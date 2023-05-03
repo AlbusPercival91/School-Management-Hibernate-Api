@@ -13,20 +13,24 @@ import lombok.Getter;
 @Table(name = "students_courses_checkouts", schema = "school")
 public class StudentCourseRelation {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "checkouts_id")
-  private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "checkouts_id")
+	private int id;
 
-  @Column(name = "student_id")
-  private int studentId;
+	@Column(name = "student_id")
+	private int studentId;
 
-  @Column(name = "course_id")
-  private int courseId;
+	@Column(name = "course_id")
+	private int courseId;
 
-  public StudentCourseRelation(int studentId, int courseId) {
-    this.studentId = studentId;
-    this.courseId = courseId;
-  }
+	public StudentCourseRelation() {
+
+	}
+
+	public StudentCourseRelation(int studentId, int courseId) {
+		this.studentId = studentId;
+		this.courseId = courseId;
+	}
 
 }
